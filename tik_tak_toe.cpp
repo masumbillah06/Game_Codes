@@ -123,30 +123,43 @@ int main()
             int t=0;
             vi players = {1,2,1,2,1,2,1,2,1};
             bool flagwin = false;
+            bool chkinsert = true;
+            int player;
 
             while (t<9)
             {
-                int player = players[t];
-                cout<<endl;  show(grid);
+                if(chkinsert) cout << "\033[H\033[2J";
+
+                player = players[t];
+                cout<<endl;  
+                show(grid);
                 cout<<"Player " << player << " : ";
-                int x; cin>>x;
-                bool chkinsert = insertIt(x, player, vis, grid);
+                int pos; cin>>pos;
+                chkinsert = insertIt(pos, player, vis, grid);
                 if(chkinsert){
                     flagwin = checkWin(grid);
-                    if(flagwin){
-                        int otherplayer;
-                        if(player==1) otherplayer=2; else otherplayer=1;
-                        cout<<endl;
-                        show(grid);
-                        cout <<"\nPlayer "<<player<<" is the Winner! Congrats!!";
-                        cout <<"\nPlayer "<<otherplayer<<" is the LOOSER! Cry More!!\n\n";
-                        break;
-                    }
+                    if(flagwin) break;
                     t++;
+                    cout << "\033[H"; 
                 }
-                else cout<<"Position "<< x <<" has already been taken!"<<endl<<"Insert Again!"<<endl;
+                else{
+                    cout << "\033[H\033[2J";
+                    cout<<"Position "<< pos <<" has already been taken!"<<endl<<"Insert Again!"<<endl;
+                }
             }
+
+            if(flagwin){
+                cout << "\033[H\033[2J";
+                int otherplayer;
+                if(player==1) otherplayer=2; else otherplayer=1;
+                cout<<endl;
+                show(grid);
+                cout <<"\nPlayer "<<player<<" is the Winner! Congrats!!";
+                cout <<"\nPlayer "<<otherplayer<<" is the LOOSER! Cry More!!\n\n";
+            }
+
             if(t>=9 || !flagwin){
+                cout << "\033[H\033[2J";
                 cout<<endl;
                 show(grid);
                 cout<<"=====DRAW====="<<endl<< endl;
