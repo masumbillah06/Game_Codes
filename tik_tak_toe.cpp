@@ -15,7 +15,8 @@ void build_board(vvc &grid){
             if(i % 2 == 0){
                 if(j % 2 == 0) grid[i][j]=connect;
                 else grid[i][j]=hor;
-            } else {
+            } 
+            else{
                 if(j % 2 == 0) grid[i][j]=ver;
                 else grid[i][j]=' ';
             }
@@ -86,20 +87,20 @@ bool insertIt(int pos, int player, vb &vis, vvc &grid){
 
 bool checkWin(vvc &grid){
     //rows
-    for (int i = 1; i <= 5; i += 2) {
+    for(int i = 1; i <= 5; i += 2){
         if (grid[i][1]!=' ' && grid[i][1]==grid[i][3] && grid[i][3]==grid[i][5])
             return true;
     }
     //columns
-    for (int i = 1; i <= 5; i += 2) {
+    for(int i = 1; i <= 5; i += 2){
         if (grid[1][i]!=' ' && grid[1][i]==grid[3][i] && grid[3][i]==grid[5][i])
             return true;
     }
     //diagonals
-    if (grid[1][1]!=' ' && grid[1][1]==grid[3][3] && grid[3][3]==grid[5][5])
+    if(grid[1][1]!=' ' && grid[1][1]==grid[3][3] && grid[3][3]==grid[5][5])
         return true;
 
-    if (grid[5][1]!=' ' && grid[5][1]==grid[3][3] && grid[3][3]==grid[1][5])
+    if(grid[5][1]!=' ' && grid[5][1]==grid[3][3] && grid[3][3]==grid[1][5])
         return true;
 
     return false;
